@@ -1,47 +1,28 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
-    struct ListNode * new = malloc(sizeof(struct ListNode));
-    struct ListNode * temp ;
-    struct ListNode * next = new;
-    struct ListNode * l1next = l1;
-    struct ListNode * l2next = l2;
-    if(NULL == l1)
-    {
-        return l2;
-    }
-    if(NULL == l2)
-    {
-        return l1;
-    }
+    struct ListNode * prehead = malloc(sizeof(struct ListNode));
+    struct ListNode *prev = prehead;
     
-    while(l1next || l2next)
-    {
-        temp = malloc(sizeof(struct ListNode));
-        if((l1next)&&(l2next))
-        {
-            if(l1next->val > l2next->val)
-            {                
-                temp->val = l2next->val;  
-                l2next = l2next->next;
-            }
-            else
-            {
-                temp->val = l1next->val;
-                l1next = l1next->next;
-            }          
+    while (l1 != NULL && l2 != NULL) {
+        if (l1->val <= l2->val) {
+            prev->next = l1;
+            l1 = l1->next;
+        } else {
+            prev->next = l2;
+            l2 = l2->next;
         }
-        else if(l1next)
-        {
-             temp->val = l1next->val;
-             l1next = l1next->next;
-        }
-        else
-        {
-            temp->val = l2next->val;  
-            l2next = l2next->next;
-        }
-        temp->next = NULL;
-        next->next = temp;
-        next = temp;  
-    }
-    return new->next;
+        prev = prev->next;
+   }
+
+   prev->next = l1 == NULL ? l2 : l1;
+
+   return prehead->next;
 }

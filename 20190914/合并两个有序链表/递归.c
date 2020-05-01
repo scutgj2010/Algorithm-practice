@@ -5,8 +5,11 @@
  *     struct ListNode *next;
  * };
  */
-
-
+/**
+    l1[0]->next = merge(l1[1:],l2)    l1[0]<l2[0]
+    l2[0]->next = merge(l1,l2[1:])   otherwise
+**/
+?	
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
     if(l1 == NULL) {
         return l2;
