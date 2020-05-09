@@ -51,7 +51,6 @@ char * reverseWords(char * s){
             start = end+1;
         }
     }
-    printf("%s,end is 0x%x\n",s,end);
     reverse(s,start,end);
     return s;
 }
